@@ -28,9 +28,8 @@ jobs:
           images: |
             ryanlauterbach/perl-catalyst
           tags: |
-            type=raw,value=${{ env.PERL_DOCKER_TAG }},enable=true
-            type=schedule,pattern={{date 'YYYYMMDD HH:mm:ss'}},enable=true,priority=100
-            type=raw,value=latest,enable=true
+            type=raw,value=${{ env.PERL_DOCKER_TAG }}
+            type=raw,value=latest
             
       - name: Login to DockerHub
         if: github.event_name != 'pull_request'
