@@ -50,6 +50,7 @@ HTML::FormHandler::Model::DBIC
 
 # Optional, so catalyst logging can detect screen width
 Term::Size::Any
+HTTP::Tinyish
 
 # Catalyst stuff, in order of requirements, sort of
 Catalyst::Devel
