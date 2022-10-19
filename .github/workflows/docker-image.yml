@@ -5,9 +5,13 @@ on:
   push:
     branches:
       - 'workflow'
+    tags:
+      - '*'
   pull_request:
     branches:
       - 'main'
+    tags:
+      - '*'
 
 jobs:
   docker:
