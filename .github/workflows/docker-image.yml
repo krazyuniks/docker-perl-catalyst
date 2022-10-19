@@ -1,0 +1,51 @@
+name: ci
+
+on:
+  push:
+    tags:
+      - '*'
+  pull_request:
+    tags:
+      - '*'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Set env
+        run: cat environment.sh >> $GITHUB_ENV
+
+      - name: Set perl modules env
+        run: echo "CPAN_MODULES=$(grep -E '^[A-Z].+' cpan_modules.txt | tr '\n' ' ' | sed -re 's/\s+$//g')" >> $GITHUB_ENV
+
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4.1.1
+        with:
+          images: |
+            ryanlauterbach/perl-catalyst
+          tags: |
+            type=raw,value=${{ env.PERL_DOCKER_TAG }},enable=true
+            type=schedule,pattern={{date 'YYYYMMDD.HH:mm:ss'}},enable=true,priority=100
+            type=raw,value=latest,enable={{is_default_branch}}
+            
+      - name: Login to DockerHub
+        if: github.event_name != 'pull_request'
+        uses: docker/login-action@v2.1.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v3.2.0
+        with:
+          context: .
+          build-args: |
+            PERL_DOCKER_TAG=${{ env.PERL_DOCKER_TAG }}
+            CPAN_MODULES=${{ env.CPAN_MODULES }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
