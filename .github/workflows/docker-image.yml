@@ -40,6 +40,9 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
+          build-args: |
+            PERL_DOCKER_TAG=${{ env.PERL_DOCKER_TAG }}
+            CPAN_MODULES=${{ env.CPAN_MODULES }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ env.PERL_DOCKER_TAG }}
           labels: ${{ steps.meta.outputs.labels }}
