@@ -18,6 +18,9 @@ jobs:
       - name: Set env
         run: cat environment.sh >> $GITHUB_ENV
 
+      - name: Set perl modules env
+        run: echo "CPAN_MODULES=$(grep -E '^[A-Z].+' cpan_modules.txt | tr '\n' ' ')" >> $GITHUB_ENV
+
       - name: Docker meta
         id: meta
         uses: docker/metadata-action@v4
