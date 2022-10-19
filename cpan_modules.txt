@@ -33,6 +33,7 @@ Template::Plugin::Number::Format
 Template::Toolkit::Simple
 Tie::Hash::Indexed
 URI::Encode
+WWW::Mailchimp
 
 # Database Stuff
 DBD::mysql
