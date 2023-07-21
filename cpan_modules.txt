@@ -34,7 +34,7 @@ Template::Toolkit::Simple
 Tie::Hash::Indexed
 URI::Encode
 WWW::Mailchimp
-XML::Simple
+XML::LibXML
 
 # Database Stuff
 DBD::mysql
