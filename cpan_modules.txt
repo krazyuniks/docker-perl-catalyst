@@ -25,6 +25,7 @@ Math::Round
 Moose
 MooseX::NonMoose
 Smart::Comments
+Spreadsheet::ParseExcel
 String::Random
 Template::Plugin::Class
 Template::Plugin::DateTime
@@ -54,10 +55,9 @@ HTML::FormHandler::Model::DBIC
 Term::Size::Any
 
 # Catalyst stuff, in order of requirements, sort of
-Catalyst::Devel
-Catalyst::Runtime
-Catalyst::Model::DBIC::Schema
 Catalyst::Authentication::Store::DBIx::Class
+Catalyst::Devel
+Catalyst::Model::DBIC::Schema
 Catalyst::Plugin::Authorization::ACL
 Catalyst::Plugin::Authorization::Roles
 Catalyst::Plugin::ConfigLoader
@@ -74,9 +74,12 @@ Catalyst::Plugin::Session::Store::DBIC
 Catalyst::Plugin::Session::Store::File
 Catalyst::Plugin::StackTrace
 Catalyst::Plugin::Static::Simple
+Catalyst::Runtime
+Catalyst::TraitFor::Request::ProxyBase
 Catalyst::View::Email::Template
 Catalyst::View::GD
 Catalyst::View::GD::Barcode::QRcode
 Catalyst::View::JSON
 Catalyst::View::TT
 Catalyst::View::TT::Alloy
+CatalystX::RoleApplicator
