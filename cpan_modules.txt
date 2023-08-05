@@ -32,10 +32,13 @@ Template::Plugin::DateTime
 Template::Plugin::JSON
 Template::Plugin::Number::Format
 Template::Toolkit::Simple
+Text::CSV
+Text::CSV::Simple
 Tie::Hash::Indexed
 URI::Encode
 WWW::Mailchimp
 XML::LibXML
+XML::Simple
 
 # Database Stuff
 DBD::mysql
@@ -83,3 +86,4 @@ Catalyst::View::JSON
 Catalyst::View::TT
 Catalyst::View::TT::Alloy
 CatalystX::RoleApplicator
+Catalyst::Plugin::Cache::FastMmap
