@@ -1,1 +1,1 @@
-PERL_DOCKER_TAG=5.38.0-slim-bullseye
+PERL_VERSION=5.38.0-r0

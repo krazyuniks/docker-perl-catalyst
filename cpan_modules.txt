@@ -41,7 +41,7 @@ XML::LibXML
 XML::Simple
 
 # Database Stuff
-DBD::mysql
+DBD::MariaDB
 DBIx::Class
 DBIx::Class::Helper::ResultSet::Random
 DBIx::Class::PassphraseColumn
@@ -49,6 +49,7 @@ DBIx::Class::Schema::Loader
 DBIx::Class::Tree::NestedSet
 DBIx::Class::UUIDColumns
 DBIx::Raw
+SQL::Abstract::Classic
 
 # Depends on database stuff
 HTML::FormHandler::Moose
