@@ -28,7 +28,7 @@ jobs:
           images: |
             ryanlauterbach/perl-catalyst
           tags: |
-            type=raw,value=${{ env.PERL_DOCKER_TAG }}
+            type=raw,value=${{ env.PERL_VERSION }}
             type=raw,value=latest
             
       - name: Login to DockerHub
@@ -43,7 +43,7 @@ jobs:
         with:
           context: .
           build-args: |
-            PERL_DOCKER_TAG=${{ env.PERL_DOCKER_TAG }}
+            PERL_DOCKER_TAG=${{ env.PERL_VERSION }}
             CPAN_MODULES=${{ env.CPAN_MODULES }}
           push: true
           tags: ${{ steps.meta.outputs.tags }}
