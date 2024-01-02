@@ -10,6 +10,6 @@ RUN apk update && \
     cpanm -n App::cpanoutdated && \
     curl -fsSL https://raw.githubusercontent.com/skaji/cpm/main/cpm | perl - install -g App::cpm && \
     cpan-outdated -p | xargs cpm install && \
-    bash ./install_cpan_modules.sh && \
-    apk del perl-dev build-base libtool libpng-dev giflib-dev libjpeg-turbo-dev tiff-dev freetype-dev openssl openssl-dev expat-dev gd-dev libxml2-dev db-dev yaml-dev libxslt-dev curl-dev pcre-dev zlib-dev json-c-dev gmp-dev mariadb-dev mariadb mariadb-connector-c-dev && \
+    bash ./install_cpan_modules.sh
+RUN apk del perl-dev build-base libtool libpng-dev giflib-dev libjpeg-turbo-dev tiff-dev freetype-dev openssl openssl-dev expat-dev gd-dev libxml2-dev db-dev yaml-dev libxslt-dev curl-dev pcre-dev zlib-dev json-c-dev gmp-dev mariadb-dev mariadb && \
     rm -rf /usr/share/{info,gtk-doc,doc,man,apk} /usr/local/share/{doc,man} /var/cache /root/.c* /root/.p*
