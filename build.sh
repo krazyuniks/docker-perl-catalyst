@@ -5,10 +5,8 @@
 
 set -e
 
-set -o allexport; source environment.sh; set +o allexport
+docker pull cgr.dev/chainguard/wolfi-base:latest
 
-CPAN_MODULES=$(grep -E '^[A-Z].+' cpan_modules.txt | tr '\n' ' ' | sed -re 's/\s+$//g')
-
-docker build -t ryanlauterbach/perl-catalyst:latest -t ryanlauterbach/perl-catalyst:${PERL_VERSION} --build-arg PERL_VERSION=${PERL_VERSION} --build-arg CPAN_MODULES="${CPAN_MODULES}" .
+docker build -t ryanlauterbach/perl-catalyst:latest --no-cache --progress=plain . 2>&1 | tee docker_build.log
 
 docker push --all-tags ryanlauterbach/perl-catalyst

@@ -1,1 +1,0 @@
-PERL_VERSION=5.38.0-r0
