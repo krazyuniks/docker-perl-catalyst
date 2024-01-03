@@ -1,7 +1,7 @@
-FROM --platform=amd64 cgr.dev/chainguard/wolfi-base
+FROM --platform=amd64 cgr.dev/chainguard/wolfi-base as builder
 
-COPY install_cpan_modules.sh .
-COPY cpan_modules.txt .
+COPY install_cpan_modules.sh ./install_cpan_modules.sh
+COPY default_cpan_modules.txt ./default_cpan_modules.txt
 
 RUN apk update && \
     apk upgrade && \
@@ -10,6 +10,13 @@ RUN apk update && \
     cpanm -n App::cpanoutdated && \
     curl -fsSL https://raw.githubusercontent.com/skaji/cpm/main/cpm | perl - install -g App::cpm && \
     cpan-outdated -p | xargs cpm install && \
-    bash ./install_cpan_modules.sh && \
+    bash ./install_cpan_modules.sh default_cpan_modules.txt
+
+
+FROM builder
+
+COPY additional_cpan_modules.txt ./additional_cpan_modules.txt
+
+RUN bash ./install_cpan_modules.sh additional_cpan_modules.txt && \
     apk del perl-dev build-base libtool libpng-dev giflib-dev libjpeg-turbo-dev tiff-dev freetype-dev openssl openssl-dev expat-dev gd-dev libxml2-dev db-dev yaml-dev libxslt-dev curl-dev pcre-dev zlib-dev json-c-dev gmp-dev mariadb-dev mariadb && \
-    rm -rf /usr/share/{info,gtk-doc,doc,man,apk} /usr/local/share/{doc,man} /var/cache /root/.c* /root/.p*
+    rm -rf /usr/share/{info,gtk-doc,doc,man,apk} /usr/local/share/{doc,man} /var/cache /root/.cpan* /root/.perl-cpm

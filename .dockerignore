@@ -1,2 +1,4 @@
 .git
 .github
+build.sh
+docker_build.log

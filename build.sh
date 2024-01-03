@@ -5,8 +5,8 @@
 
 set -e
 
-docker pull cgr.dev/chainguard/wolfi-base:latest
+#docker pull cgr.dev/chainguard/wolfi-base:latest
 
-docker build -t ryanlauterbach/perl-catalyst:latest --no-cache --progress=plain . 2>&1 | tee docker_build.log
+docker build -t ryanlauterbach/perl-catalyst:latest --progress=plain . 2>&1 | tee docker_build.log
 
-docker push --all-tags ryanlauterbach/perl-catalyst
+#docker push --all-tags ryanlauterbach/perl-catalyst
