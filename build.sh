@@ -5,8 +5,8 @@
 
 set -e
 
-#docker pull cgr.dev/chainguard/wolfi-base:latest
+source environment.sh
 
-docker build -t ryanlauterbach/perl-catalyst:latest --progress=plain . 2>&1 | tee docker_build.log
+docker build -t ryanlauterbach/perl-catalyst:latest --progress=plain -t ryanlauterbach/perl-catalyst:${PERL_DOCKER_TAG} --build-arg PERL_DOCKER_TAG=${PERL_DOCKER_TAG} --build-arg CPAN_MODULES="${CPAN_MODULES}" . 2>&1 | tee docker_build.log
 
 #docker push --all-tags ryanlauterbach/perl-catalyst
