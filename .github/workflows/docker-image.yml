@@ -39,11 +39,7 @@ jobs:
         with:
           context: .
           build-args: |
-<<<<<<< HEAD
-            CPAN_MODULES=${{ env.CPAN_MODULES }}
-=======
             PERL_DOCKER_TAG=${{ env.PERL_DOCKER_TAG }}
->>>>>>> refs/remotes/origin/main
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
