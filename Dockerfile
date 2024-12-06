@@ -1,19 +1,18 @@
-FROM --platform=amd64 cgr.dev/chainguard/wolfi-base as builder
+ARG PERL_DOCKER_TAG
 
-RUN apk update && \
-    apk upgrade && \
-    apk add --force-overwrite bash perl perl-dev build-base libtool libpng-dev giflib-dev libjpeg-turbo-dev tiff-dev freetype-dev openssl openssl-dev expat-dev libzip gd-dev libxml2-dev db-dev yaml-dev libxslt-dev curl-dev libmcrypt pcre-dev zlib-dev json-c-dev gmp-dev mariadb-dev mariadb-connector-c-dev curl && \
-    curl -fsSL https://raw.githubusercontent.com/skaji/cpm/main/cpm | perl - install -g App::cpm
+FROM perl:$PERL_DOCKER_TAG
 
-ARG CPAN_MODULES
-RUN cpm install --show-build-log-on-failure --global $CPAN_MODULES
+WORKDIR /usr/src/App
 
-FROM --platform=amd64 cgr.dev/chainguard/wolfi-base
+COPY install_cpan_modules.sh default_cpan_modules.txt ./
 
-RUN apk update && \
-    apk upgrade && \
-    apk add perl libpng giflib libjpeg-turbo libzip libxml2 libxslt libmcrypt zlib mariadb-connector-c bash && \
-    rm -rf /usr/share/{info,gtk-doc,doc,apk} /var/cache
-
-COPY --from=builder /usr/local/share/perl5 /usr/local/share/perl5
-COPY --from=builder /usr/local/lib/perl5 /usr/local/lib/perl5
+RUN apt -y update && \
+    apt -y dist-upgrade && \
+    apt -y install build-essential libtool libpng-dev libgif-dev libjpeg-dev libtiff-dev libfreetype6-dev libssl-dev libexpat-dev libzip-dev libgd-dev libxml2-dev libdb-dev libyaml-dev libxslt-dev libcurl4-openssl-dev libmcrypt-dev libpcre3-dev zlib1g-dev libjson-c-dev libgmp-dev libmariadb-dev-compat libmariadb-dev curl && \
+    curl -fsSL https://raw.githubusercontent.com/skaji/cpm/main/cpm | perl - install -g App::cpm && \
+    ./install_cpan_modules.sh default_cpan_modules.txt
+    
+# don't clean these so users can continue to use build tools
+# apt -y purge --auto-remove build-essential libtool && \
+# rm -rf /var/lib/apt /var/lib/dpkg /usr/share/doc/ /usr/share/man* /usr/share/locale* /usr/share/perl /root/.cpanm /root/.cpan /root/.perl-cpm
+# apt clean
