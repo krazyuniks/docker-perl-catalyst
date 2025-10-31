@@ -1,1 +1,1 @@
-PERL_DOCKER_TAG=5.40.0-slim-bookworm
+PERL_DOCKER_TAG=5.42.0-slim-trixie

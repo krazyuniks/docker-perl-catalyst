@@ -1,6 +1,8 @@
 ############################
 # Misc. modules and prereqs
 ###########################
+CryptX
+Crypt::Argon2
 Archive::Extract
 Archive::Zip
 Captcha::reCAPTCHA
@@ -44,7 +46,7 @@ XML::Simple
 DBD::MariaDB
 DBIx::Class
 DBIx::Class::Helper::ResultSet::Random
-DBIx::Class::PassphraseColumn
+DBIx::Class::EncodedColumn
 DBIx::Class::Schema::Loader
 DBIx::Class::Storage::DBI::MariaDB
 DBIx::Class::Tree::NestedSet
